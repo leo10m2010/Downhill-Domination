@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Port experimental C++ a WebAssembly. Carga local de recursos convertidos de tu copia del juego.">
+  <title>Downhill Domination · Web</title><link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header><a class="wordmark" href="./">DOWNHILL<span>DOMINATION / WEB</span></a><a href="https://github.com/Pedroj-64/DownHill-Port-PC" target="_blank" rel="noopener">Motor original ↗</a></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">C++ → WEBASSEMBLY</p><h1>La pista.<br>En tu navegador.</h1></div><p class="brief">Prototipo de conducción ALP2.<br>El motor corre en tu equipo; tus archivos permanecen aquí. Reimplementación parcial, sin recursos del juego incluidos.</p></section>
+    <section class="workspace" aria-label="Juego y configuración">
+      <div class="viewport" id="viewport">
+        <canvas id="canvas" width="1280" height="720" tabindex="0" aria-label="Canvas del motor; haz clic para enfocar los controles"></canvas>
+        <div class="empty" id="empty"><span class="track">ALP2</span><h2>Prepara tu descenso</h2><p>Selecciona los modelos y la colisión convertidos de tu copia del juego.</p><p class="note">Sin piloto animado, rivales ni audio en esta iteración.</p></div>
+        <div class="hud" id="hud" hidden><span id="race">—</span><span id="speed">— km/h</span><span id="gates">— puertas</span></div>
+      </div>
+      <aside>
+        <h2>Preparación</h2>
+        <p id="status" role="status" aria-live="polite">Preparando el motor…</p>
+        <progress id="progress" max="1" value="0" aria-label="Progreso de carga"></progress>
+        <button id="load" disabled>Cargar archivos del juego</button>
+        <input id="files" type="file" multiple accept=".mdl,.col,.gates,.pts" hidden>
+        <button id="play" class="primary" disabled>Jugar</button>
+        <p id="error" class="error" role="alert" hidden></p>
+        <div class="settings"><label for="resolution">Resolución interna</label><select id="resolution"><option value="960x540">960 × 540 · Baja</option><option value="1280x720" selected>1280 × 720 · Media</option><option value="1920x1080">1920 × 1080 · Alta</option></select><button id="fullscreen">Pantalla completa</button></div>
+        <details><summary>Controles</summary><dl><dt>W / S</dt><dd>Acelerar / frenar</dd><dt>A / D</dt><dd>Girar</dd><dt>Q / E</dt><dd>Inclinar</dd><dt>Espacio</dt><dd>Saltar</dd><dt>Enter</dt><dd>Reaparecer</dd><dt>T</dt><dd>Reiniciar pista</dd><dt>Mayús</dt><dd>Pedaleo extra</dd></dl><p>Haz clic en el canvas. La simulación se pausa al cambiar de pestaña o perder el foco.</p></details>
+        <details id="asset-help"><summary>Archivos necesarios</summary><p>ALP2.mdl, ALP2.col, ALP2.gates, ALP2.start.pts y bike1.mdl. Añade ALP2.sky.mdl y ALP2.dome.mdl si fueron exportados.</p><p>Convierte los recursos con las herramientas Python offline. No selecciones la ISO.</p></details>
+      </aside>
+    </section>
+    <section class="telemetry" aria-label="Métricas reales del motor"><span id="fps">— FPS</span><span id="frame">— ms/fotograma</span><span id="memory">— MiB WASM</span><span id="loadtime">— s de carga</span></section>
+    <details class="technical"><summary>Registro técnico local</summary><pre id="log"></pre></details>
+  </main>
+  <footer><span>Port experimental de la comunidad</span><a href="LICENSE">GPL-3.0-or-later</a><span>Datos locales · Sin subidas</span></footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
